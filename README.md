@@ -6,76 +6,121 @@
 [![License: MIT](https://img.shields.io/badge/license-MIT-175CD3)](LICENSE)
 [![Last commit](https://img.shields.io/github/last-commit/felix-liuyj/codex-terminal?label=last%20commit)](https://github.com/felix-liuyj/codex-terminal/commits/main)
 
+<p align="center">
+  <img src="plugins/codex-terminal/assets/codex-terminal.svg" width="128" height="128" alt="Codex Terminal logo">
+</p>
+
 <p align="center"><strong>A visible, interactive Terminal surface for Codex tasks.</strong></p>
-<p align="center">Create a real PTY, mount it in Codex, share control with the user, work inside nested SSH or CLI sessions, and close it safely.</p>
+<p align="center">Create a real PTY, display it inside Codex, share control with the user, work in nested SSH or CLI sessions, and close it safely.</p>
 
 ## Contents
 
-- [Quick start](#quick-start)
-- [Capabilities](#capabilities)
+- [Why Codex Terminal](#why-codex-terminal)
+- [Install from GitHub](#install-from-github)
+- [Use the plugin](#use-the-plugin)
+- [Update or remove](#update-or-remove)
+- [Capabilities and boundaries](#capabilities-and-boundaries)
 - [Repository structure](#repository-structure)
-- [Validation](#validation)
-- [Safety model](#safety-model)
+- [Development and validation](#development-and-validation)
 - [Contributing](#contributing)
 
-## Quick start
+## Why Codex Terminal
+
+Codex Terminal gives an explicitly selected terminal task a real interactive PTY and a native Codex Terminal tab. Unlike a hidden one-shot shell command, the session remains visible and writable, so the user and Codex can follow the same output, take turns typing, answer prompts, interrupt foreground work, and move through nested shells without losing session context.
+
+The plugin is guidance for Codex rather than a privilege boundary. It keeps the host's workspace, sandbox, approval, secret-handling, SSH host-key, and destructive-action safeguards in force.
+
+## Install from GitHub
 
 ### Requirements
 
 - A current Codex desktop or CLI installation with `codex plugin` support.
-- A local Codex task; native Terminal tabs are not available to cloud-only tasks.
-- `python3`, Ruby, and `xmllint` for repository validation.
+- A local Codex task. Native Terminal tabs are unavailable to cloud-only tasks.
 
-From this repository root, register the non-default local marketplace and install the plugin:
+Register the published marketplace, install the plugin, and verify discovery:
 
 ```sh
-codex plugin marketplace add "$PWD"
+codex plugin marketplace add felix-liuyj/codex-terminal
+codex plugin add codex-terminal@codex-terminal-local
+codex plugin list --marketplace codex-terminal-local
+```
+
+Start a new Codex task after installation so Codex discovers the skill. Existing tasks do not automatically gain newly installed plugin capabilities.
+
+## Use the plugin
+
+Select `@codex-terminal` in a new local task, or make the surface requirement explicit in your request. For example:
+
+```text
+Use @codex-terminal to create and show an interactive Terminal for this task.
+使用 @codex-terminal 创建并显示一个我可以接管的交互式终端。
+Use @codex-terminal to open SSH through my configured host alias.
+```
+
+When explicitly selected, the plugin requires the native Codex Terminal surface. If the host cannot create or display a controllable PTY, Codex should report the missing capability instead of silently substituting a hidden shell.
+
+For passwords, passphrases, MFA codes, recovery codes, and other secrets, take control of the visible Terminal and type them there. Do not send secrets through chat.
+
+## Update or remove
+
+Refresh the GitHub marketplace snapshot, reinstall the current plugin version, and then start a new task:
+
+```sh
+codex plugin marketplace upgrade codex-terminal-local
 codex plugin add codex-terminal@codex-terminal-local
 ```
 
-Start a new Codex task after installation so the skill is discovered. Select `@codex-terminal`, or ask Codex to create and display an interactive Codex Terminal. The plugin intentionally requires the native Codex Terminal surface when explicitly selected; it does not silently substitute a hidden one-shot shell.
+Remove the installed plugin when it is no longer needed:
 
-## Capabilities
+```sh
+codex plugin remove codex-terminal@codex-terminal-local
+```
 
-- Creates persistent PTYs and mounts them in a visible Codex Terminal tab.
-- Sends commands, input, and intentional control keys while reporting only new output.
-- Supports explicit user handoff and safe recovery before Codex resumes typing.
-- Tracks nested shells, SSH, REPLs, database CLIs, and container sessions.
-- Handles foreground long-running commands without unrequested background processes.
-- Preserves workspace, sandbox, approval, host-key, secret-handling, and destructive-action safeguards.
-- Recognizes terminal intent in Chinese, English, Japanese, Korean, Spanish, French, German, Portuguese, Russian, and Arabic.
+## Capabilities and boundaries
+
+| Area | Supported behavior |
+| --- | --- |
+| PTY lifecycle | Create, display, reuse, inspect, interrupt, and close a persistent interactive session |
+| Shared control | Hand input to the user and recover safely before Codex resumes typing |
+| Nested sessions | Track local shells, SSH, REPLs, database CLIs, and container shells |
+| Long-running work | Keep foreground commands visible and poll without unrequested background processes |
+| Control input | Send intentional `Control-C`, `Control-D`, `Control-Z`, or Escape only after inspecting state |
+| Languages | Recognize terminal intent in Chinese, English, Japanese, Korean, Spanish, French, German, Portuguese, Russian, and Arabic |
+| Safety | Preserve Codex permissions, sandboxing, approvals, host-key verification, and destructive-action checks |
+
+The plugin does not prove a deployment, migration, upload, or remote service is healthy merely because a command exits successfully. Verify consequential results at the appropriate application or infrastructure layer.
 
 ## Repository structure
 
 ```text
 .
-├── .agents/plugins/marketplace.json       # Local marketplace catalog
+├── .agents/plugins/marketplace.json       # Published marketplace catalog
 ├── plugins/codex-terminal/
 │   ├── .codex-plugin/plugin.json          # Package and presentation metadata
 │   ├── assets/                            # Reviewable SVG artwork
 │   └── skills/control-codex-terminal/     # Terminal behavior and agent metadata
-├── scripts/validate.sh                    # Repository validation gate
+├── scripts/validate.sh                    # Complete repository validation gate
 ├── AGENTS.md                              # Contributor and agent guidance
-└── LICENSE
+└── LICENSE                                # MIT license
 ```
 
-The plugin has no runtime environment variables, external service credentials, package manager, build step, or deployment process. `CODEX_PYTHON` and `CODEX_SKILLS_ROOT` are optional validation-only overrides for locating a Python interpreter with PyYAML and the local official validator skills.
+The plugin has no runtime environment variables, external service credentials, package manager, compilation step, or deployment process.
 
-## Validation
+## Development and validation
 
-Run the complete portable gate:
+Clone the repository and run the complete portable gate:
 
 ```sh
+git clone https://github.com/felix-liuyj/codex-terminal.git
+cd codex-terminal
 ./scripts/validate.sh
 ```
 
-The script parses both JSON manifests, the YAML agent metadata, and every SVG; checks marketplace/manifest identity and visible-label alignment; rejects placeholders, machine-specific paths, embedded base64 images, external metadata icons, and private-key material; then runs the official plugin and skill validators when those local Codex skills are available.
+The script parses the marketplace and plugin manifests, Agent YAML, and every SVG; checks metadata alignment and marketplace policy; rejects placeholders, machine-specific paths, embedded base64 images, external metadata icons, and common private-key or token material; then runs the official plugin and skill validators when those local Codex skills are available.
 
-Behavioral changes also require a local Codex acceptance pass: create and mount a PTY, send harmless input, read the mounted Terminal, enter and exit a nested shell, interrupt a foreground command, recover after handoff, and confirm a clean exit. Record any host capability that could not be exercised.
+`CODEX_PYTHON` and `CODEX_SKILLS_ROOT` are optional validation-only overrides for locating a Python interpreter with PyYAML and the local official validator skills. Portable validation requires `python3`, Ruby, `xmllint`, and `rg`.
 
-## Safety model
-
-The plugin guides Codex; it does not bypass Codex permissions. Users should type passwords, passphrases, MFA codes, and other secrets directly into the visible Terminal. Do not place credentials in prompts, manifests, examples, command arguments, screenshots, or committed files. A zero exit code is not proof that a remote operation or user flow is healthy; verify results at the appropriate layer.
+Behavioral changes also require a local Codex acceptance pass: create and display a PTY, send harmless input, read the mounted Terminal, enter and exit a nested shell, interrupt a foreground command, recover after user handoff, and confirm a clean exit. Record any host capability that could not be exercised.
 
 ## Contributing
 
