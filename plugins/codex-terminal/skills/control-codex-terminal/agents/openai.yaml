@@ -1,0 +1,4 @@
+interface:
+  display_name: "Codex Terminal"
+  short_description: "创建、显示并共同控制可交互的 Codex Terminal 会话"
+  default_prompt: "Use $control-codex-terminal to create, show, and jointly control an interactive Codex Terminal for this task."

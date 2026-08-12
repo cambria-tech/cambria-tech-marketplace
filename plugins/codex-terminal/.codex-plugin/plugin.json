@@ -1,0 +1,51 @@
+{
+  "name": "codex-terminal",
+  "version": "0.1.0+codex.20260812090019",
+  "description": "Create, display, and jointly control interactive Codex Terminal PTY and SSH sessions while preserving Codex safety boundaries.",
+  "author": {
+    "name": "Felix Liu",
+    "url": "https://github.com/felix-liuyj"
+  },
+  "homepage": "https://github.com/felix-liuyj/codex-terminal",
+  "repository": "https://github.com/felix-liuyj/codex-terminal",
+  "license": "MIT",
+  "keywords": [
+    "terminal",
+    "shell",
+    "console",
+    "command-line",
+    "pty",
+    "ssh",
+    "interactive",
+    "\u7ec8\u7aef",
+    "\u547d\u4ee4\u884c",
+    "\u63a7\u5236\u53f0",
+    "\u30bf\u30fc\u30df\u30ca\u30eb",
+    "\ud130\ubbf8\ub110",
+    "consola",
+    "\u043a\u043e\u043d\u0441\u043e\u043b\u044c",
+    "\u0637\u0631\u0641\u064a\u0629",
+    "felix-liuyj"
+  ],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Codex Terminal",
+    "shortDescription": "\u521b\u5efa\u3001\u663e\u793a\u5e76\u5171\u540c\u63a7\u5236\u53ef\u4ea4\u4e92\u7684 Codex Terminal \u4f1a\u8bdd",
+    "longDescription": "Codex Terminal \u4e3a\u5f53\u524d\u672c\u5730\u4efb\u52a1\u521b\u5efa\u771f\u6b63\u7684\u4ea4\u4e92\u5f0f PTY\uff0c\u5e76\u628a\u5b83\u663e\u793a\u4e3a Codex \u539f\u751f Terminal \u6807\u7b7e\u3002\u7528\u6237\u548c Codex \u53ef\u4ee5\u5171\u540c\u67e5\u770b\u8f93\u51fa\u3001\u8f93\u5165\u547d\u4ee4\u3001\u53d1\u9001\u63a7\u5236\u952e\u3001\u8fd0\u884c\u6784\u5efa\u4e0e\u6d4b\u8bd5\u3001\u8fde\u63a5 SSH\u3001\u8ddf\u8e2a\u957f\u4efb\u52a1\u5e76\u5b89\u5168\u5173\u95ed\u4f1a\u8bdd\uff1b\u540c\u65f6\u4fdd\u7559 Codex \u7684\u6c99\u7bb1\u3001\u5ba1\u6279\u548c\u751f\u4ea7\u5b89\u5168\u8fb9\u754c\u3002\u652f\u6301\u4e2d\u6587\u3001English\u3001\u65e5\u672c\u8a9e\u3001\ud55c\uad6d\uc5b4\u3001Espa\u00f1ol\u3001Fran\u00e7ais\u3001Deutsch\u3001Portugu\u00eas\u3001\u0420\u0443\u0441\u0441\u043a\u0438\u0439 \u548c \u0627\u0644\u0639\u0631\u0628\u064a\u0629\u89e6\u53d1\u3002",
+    "developerName": "Felix Liu",
+    "category": "Engineering",
+    "capabilities": [
+      "Interactive",
+      "Read",
+      "Write"
+    ],
+    "defaultPrompt": [
+      "\u521b\u5efa\u5e76\u663e\u793a\u4e00\u4e2a\u53ef\u7531\u6211\u63a5\u7ba1\u7684 Codex Terminal\u3002",
+      "Create and show an interactive Codex Terminal for this task.",
+      "\u73fe\u5728\u306e\u30bf\u30b9\u30af\u7528\u306b\u5bfe\u8a71\u578b Codex Terminal \u3092\u958b\u3044\u3066\u304f\u3060\u3055\u3044\u3002"
+    ],
+    "brandColor": "#101828",
+    "composerIcon": "./assets/composer-icon.svg",
+    "logo": "./assets/codex-terminal.svg"
+  }
+}

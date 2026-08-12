@@ -1,0 +1,20 @@
+{
+  "name": "codex-terminal-local",
+  "interface": {
+    "displayName": "Felix Liu Local Plugins"
+  },
+  "plugins": [
+    {
+      "name": "codex-terminal",
+      "source": {
+        "source": "local",
+        "path": "./plugins/codex-terminal"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Engineering"
+    }
+  ]
+}
