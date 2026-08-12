@@ -56,7 +56,7 @@ manifest = json.loads(Path(sys.argv[2]).read_text(encoding="utf-8"))
 plugins = marketplace.get("plugins", [])
 assert len(plugins) == 1, "marketplace must contain exactly one plugin"
 entry = plugins[0]
-assert marketplace.get("name") == "codex-terminal-local"
+assert marketplace.get("name") == "cambria-tech-marketplace"
 assert entry.get("name") == manifest.get("name") == "codex-terminal"
 assert entry.get("source", {}).get("path") == "./plugins/codex-terminal"
 assert entry.get("policy", {}).get("installation") == "AVAILABLE"

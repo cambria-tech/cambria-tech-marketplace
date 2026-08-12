@@ -4,7 +4,7 @@
 [![Interactive PTY](https://img.shields.io/badge/terminal-interactive%20PTY-344054)](plugins/codex-terminal/skills/control-codex-terminal/SKILL.md)
 [![Validation](https://img.shields.io/badge/validation-scripted-027A48)](scripts/validate.sh)
 [![License: MIT](https://img.shields.io/badge/license-MIT-175CD3)](LICENSE)
-[![Last commit](https://img.shields.io/github/last-commit/felix-liuyj/codex-terminal?label=last%20commit)](https://github.com/felix-liuyj/codex-terminal/commits/main)
+[![Last commit](https://img.shields.io/github/last-commit/cambria-tech/cambria-tech-marketplace?label=last%20commit)](https://github.com/cambria-tech/cambria-tech-marketplace/commits/main)
 
 <p align="center">
   <img src="plugins/codex-terminal/assets/codex-terminal.svg" width="128" height="128" alt="Codex Terminal logo">
@@ -12,6 +12,7 @@
 
 <p align="center"><strong>A visible, interactive Terminal surface for Codex tasks.</strong></p>
 <p align="center">Create a real PTY, display it inside Codex, share control with the user, work in nested SSH or CLI sessions, and close it safely.</p>
+<p align="center">Published by <a href="https://www.cambria-tech.com">Cambria Tech</a> through the Cambria Tech Marketplace.</p>
 
 ## Contents
 
@@ -40,9 +41,9 @@ The plugin is guidance for Codex rather than a privilege boundary. It keeps the 
 Register the published marketplace, install the plugin, and verify discovery:
 
 ```sh
-codex plugin marketplace add felix-liuyj/codex-terminal
-codex plugin add codex-terminal@codex-terminal-local
-codex plugin list --marketplace codex-terminal-local
+codex plugin marketplace add cambria-tech/cambria-tech-marketplace
+codex plugin add codex-terminal@cambria-tech-marketplace
+codex plugin list --marketplace cambria-tech-marketplace
 ```
 
 Start a new Codex task after installation so Codex discovers the skill. Existing tasks do not automatically gain newly installed plugin capabilities.
@@ -66,14 +67,14 @@ For passwords, passphrases, MFA codes, recovery codes, and other secrets, take c
 Refresh the GitHub marketplace snapshot, reinstall the current plugin version, and then start a new task:
 
 ```sh
-codex plugin marketplace upgrade codex-terminal-local
-codex plugin add codex-terminal@codex-terminal-local
+codex plugin marketplace upgrade cambria-tech-marketplace
+codex plugin add codex-terminal@cambria-tech-marketplace
 ```
 
 Remove the installed plugin when it is no longer needed:
 
 ```sh
-codex plugin remove codex-terminal@codex-terminal-local
+codex plugin remove codex-terminal@cambria-tech-marketplace
 ```
 
 ## Capabilities and boundaries
@@ -111,8 +112,8 @@ The plugin has no runtime environment variables, external service credentials, p
 Clone the repository and run the complete portable gate:
 
 ```sh
-git clone https://github.com/felix-liuyj/codex-terminal.git
-cd codex-terminal
+git clone https://github.com/cambria-tech/cambria-tech-marketplace.git
+cd cambria-tech-marketplace
 ./scripts/validate.sh
 ```
 
@@ -128,4 +129,4 @@ Read [AGENTS.md](AGENTS.md), keep changes focused, and use `type: 中文描述` 
 
 ## License and contact
 
-Released under the [MIT License](LICENSE). Maintained by [Felix Liu](https://github.com/felix-liuyj).
+Released under the [MIT License](LICENSE). Published and maintained by [Cambria Tech](https://www.cambria-tech.com). Contact: [cloud@cambria-tech.com](mailto:cloud@cambria-tech.com).
