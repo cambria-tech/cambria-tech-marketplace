@@ -71,8 +71,8 @@ PY
     abort "short description mismatch" unless manifest.dig("interface", "shortDescription") == agent.dig("interface", "short_description")
     abort "composer icon mismatch" unless manifest.dig("interface", "composerIcon") == "./assets/composer-icon.svg"
     abort "logo mismatch" unless manifest.dig("interface", "logo") == "./assets/codex-terminal.svg"
-    abort "skill small icon mismatch" unless agent.dig("interface", "icon_small") == "assets/composer-icon.svg"
-    abort "skill large icon mismatch" unless agent.dig("interface", "icon_large") == "assets/codex-terminal.svg"
+    abort "skill small icon mismatch" unless agent.dig("interface", "icon_small") == "./assets/composer-icon.svg"
+    abort "skill large icon mismatch" unless agent.dig("interface", "icon_large") == "./assets/codex-terminal.svg"
   ' "${MANIFEST_PATH}" "${AGENT_PATH}"
 }
 

@@ -1,6 +1,6 @@
 {
   "name": "codex-terminal",
-  "version": "0.1.0+codex.20260812112816",
+  "version": "0.1.0+codex.20260812113500",
   "description": "Create, display, and jointly control interactive Codex Terminal PTY and SSH sessions while preserving Codex safety boundaries.",
   "author": {
     "name": "Cambria Tech",
